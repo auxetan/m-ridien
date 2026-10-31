@@ -38,6 +38,8 @@ const GeoGuessr = lazy(() => import('./games/guessr/GeoGuessr'))
 const OpenFront = lazy(() => import('./games/openfront/OpenFront'))
 const Expedition = lazy(() => import('./games/expedition/Expedition'))
 const DuelPage = lazy(() => import('./duel/DuelPage'))
+const Classe = lazy(() => import('./hub/Classe'))
+const JoinClass = lazy(() => import('./hub/Classe').then((m) => ({ default: m.JoinClass })))
 
 export default function App() {
   const route = useRoute()
@@ -93,6 +95,9 @@ export default function App() {
       break
     case 'defis':
       content = <Challenges key={key} params={route.params} />
+      break
+    case 'classe':
+      content = sub === 'rejoindre' ? <JoinClass key={key} params={route.params} /> : <Classe key={key} />
       break
     case 'jetpunk':
       content = <JetPunk key={key} segments={route.segments} params={route.params} />
